@@ -18,9 +18,14 @@
   "homepage": "https://github.com/Mikhail-Makharia-1105o/frontend-project-46#readme",
   "type": "module",
   "dependencies": {
-    "commander": "^12.0.0"
+    "commander": "^12.0.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "readline-sync": "^1.4.10"
   },
   "bin": {
-    "gendiff": "gendiff.js"
+    "gendiff": "gendiff.js",
+    "parsePath": "bin/parsePath.js",
+    "parseFileData": "bin/parseFileData.js"
   }
 }
