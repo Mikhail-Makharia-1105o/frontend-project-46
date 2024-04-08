@@ -9,26 +9,28 @@
 export default function findDifference(obj1, obj2) {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
-  let excl2 = {};
-  let excl1 = {};
-  const shared = keys1.reduce((shared, key) => {
+  const excl2 = {};
+  const excl1 = {};
+  const shared = keys1.reduce((shard, key) => {
     if (keys2.includes(key)) {
       if (obj1[key] === obj2[key]) {
-        shared[key] = obj2[key];
-        console.log(shared);
-      } else {
+        shard[key] = obj2[key];
+        console.log(shard);
+      }
+      else {
         excl1[key] = obj1[key];
         excl2[key] = obj2[key];
       }
-    } else {
+    }
+    else {
       excl1[key] = obj1[key];
     }
-    return shared;
+    return shard;
   }, {});
   keys2.forEach((key) => {
     if (!(Object.keys(shared).includes(key))) {
       excl2[key] = obj2[key];
     }
-  })
+  });
   return [shared, excl1, excl2];
 }
