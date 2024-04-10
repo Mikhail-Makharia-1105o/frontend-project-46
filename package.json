@@ -4,7 +4,7 @@
   "description": "[![Actions Status](https://github.com/Mikhail-Makharia-1105o/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Mikhail-Makharia-1105o/frontend-project-46/actions)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,11 @@
   "homepage": "https://github.com/Mikhail-Makharia-1105o/frontend-project-46#readme",
   "type": "module",
   "dependencies": {
+    "@jest/globals": "^29.7.0",
     "commander": "^12.0.0",
     "fs": "^0.0.1-security",
+    "jest": "^29.7.0",
+    "jest-cli": "^29.7.0",
     "path": "^0.12.7",
     "readline-sync": "^1.4.10"
   },

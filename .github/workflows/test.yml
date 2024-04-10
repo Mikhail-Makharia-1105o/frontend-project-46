@@ -1,0 +1,29 @@
+name: test
+run-name: ${{ github.actor }} running tests
+on: [push]
+jobs:
+  run-defined-frontend-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    defaults:
+      run:
+        working-directory: ./frontend-project-46
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run test
+      - name: Test & publish code coverage
+    #   # Publish code coverage on Code Climate
+    #   # https://github.com/paambaati/codeclimate-action
+        uses: paambaati/codeclimate-action@v5.0.0
+        env:
+            CC_TEST_REPORTER_ID: ${{ secrets.TEST_COV_ID }}
+        with:
+            coverageCommand: make test-coverage
+            debug: true
