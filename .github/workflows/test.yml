@@ -16,9 +16,7 @@ jobs:
       - run: npm ci
       - run: npm run test
       - name: Test & publish code coverage
-    #   # Publish code coverage on Code Climate
-    #   # https://github.com/paambaati/codeclimate-action
-        uses: paambaati/codeclimate-action@v5.0.0
+        uses: paambaati/codeclimate-action@v3.1.1
         env:
             CC_TEST_REPORTER_ID: ${{ secrets.TEST_COV_ID }}
         with:
