@@ -23,6 +23,8 @@
     "fs": "^0.0.1-security",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
     "path": "^0.12.7",
     "readline-sync": "^1.4.10"
   },

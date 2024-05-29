@@ -1,5 +1,5 @@
 import { test, expect } from '@jest/globals';
-import findDifference from '../bin/findDifference.js';
+import compare from '../utils/compare.js';
 
 test('not find shared', () => {
   const obj1 = {
@@ -12,7 +12,23 @@ test('not find shared', () => {
     num: 200,
     str: 'sam',
   };
-  expect(findDifference(obj1, obj2)).toEqual([{}, obj1, obj2]);
+  expect(compare(obj1, obj2)).toEqual({
+    hexl: {
+      nested: false,
+      type: 'changed',
+      value: true,
+    },
+    num: {
+      nested: false,
+      type: 'changed',
+      value: 100,
+    },
+    str: {
+      nested: false,
+      type: 'changed',
+      value: 'samosval',
+    },
+  });
 });
 
 test('find shared', () => {
@@ -20,17 +36,31 @@ test('find shared', () => {
     hexl: true,
     num: 100,
     str: 'samosval',
+    obj: {
+      dima: 'dima',
+      obj2: { vasha: 'myat' },
+    },
   };
   const obj2 = {
     hexl: true,
     num: 200,
     str: 'sam',
   };
-  expect(findDifference(obj1, obj2)).toEqual([
-    { hexl: true },
-    { num: 100, str: 'samosval' },
-    { num: 200, str: 'sam' },
-  ]);
+  expect(compare(obj1, obj2)).toEqual({
+    shared: { hexl: true },
+    exclusiveObj1: {
+      num: 100,
+      str: 'samosval',
+      obj: {
+        dima: 'dima',
+        obj2: { vasha: 'myat' },
+      },
+    },
+    exclusiveObj2: {
+      num: 200,
+      str: 'sam',
+    },
+  });
 });
 
 test('find all', () => {
@@ -39,5 +69,9 @@ test('find all', () => {
     num: 100,
     str: 'samosval',
   };
-  expect(findDifference(obj1, obj1)).toEqual([obj1, {}, {}]);
+  expect(compare(obj1, obj1)).toEqual({
+    shared: obj1,
+    exclusiveObj1: {},
+    exclusiveObj2: {},
+  });
 });
