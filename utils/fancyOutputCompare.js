@@ -1,5 +1,4 @@
 #!usr/bin/env node
-
 function stringify(val, depth) {
   let output = '{\n';
   if (typeof val !== 'object' || !val) {
