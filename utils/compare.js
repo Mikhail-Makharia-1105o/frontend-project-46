@@ -1,6 +1,11 @@
-#!/usr/bin/env node
-import parseFileData from '../bin/parseFileData.js';
-import parsePath from '../bin/parsePath.js';
+#!usr/bin/env node
+// SIDENOTE:
+// Nested only applies to object that are considered shared.
+// If there is a deep object that we DO NOT need to go into(i.e. shared objects), we set nested to false.
+// False nests avoid recursion that we don't need, and help the output functions diplay results properly.
+
+// For example: { a: { b: 4 } } in obj1 is exclusive to obj1. It does not need to be set as nested because
+// it will have a - in front of it either way.
 export default function compare(obj1, obj2) {
   const output = {};
   const keys1 = Object.keys(obj1);
@@ -11,7 +16,7 @@ export default function compare(obj1, obj2) {
       if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
         const outputNested = compare(obj1[key], obj2[key]);
         if (Object.keys(outputNested).length > 0) {
-          output[key] = { value: outputNested, nested: true, type: 'changed' };
+          output[key] = { value: outputNested, type: 'changed', nested: true };
         }
       } else if (obj1[key] === obj2[key]) {
         output[key] = { value: obj1[key], type: 'shared', nested: false };
@@ -34,5 +39,3 @@ export default function compare(obj1, obj2) {
   });
   return output;
 }
-
-console.log(JSON.stringify(compare(parseFileData(parsePath('./test_files/file1.json')), parseFileData(parsePath('./test_files/file2.json'))), null, 2));
