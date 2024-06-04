@@ -10,7 +10,6 @@ export default function compare(obj1, obj2) {
   const output = {};
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
-
   keys1.forEach((key) => {
     if (keys2.includes(key)) {
       if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
