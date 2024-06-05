@@ -6,6 +6,7 @@ import parsePath from './parsePath.js';
 import parseFileData from './parseFileData.js';
 
 export default function genDiff(filePath1, filePath2, options = {format: 'stylish'}) {
+  typeof options === 'string' ? options = {format: options} : options = options;
   const path1 = parsePath(filePath1);
   const path2 = parsePath(filePath2);
   const fileData1 = parseFileData(path1);

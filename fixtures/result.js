@@ -6,7 +6,7 @@ const result = `    common: {
         setting6: {
             key: value
             doge: {
-              - wow:
+              - wow: 
               + wow: so much
             }
           + ops: vops
