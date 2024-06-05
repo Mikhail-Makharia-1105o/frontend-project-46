@@ -10,7 +10,6 @@ program
   .arguments('<filepath1>')
   .arguments('<filepath2>')
   .action((filePath1, filePath2, options) => {
-    console.log(options);
     genDiff(filePath1, filePath2, options);
   });
 /*eslint-disable-next-line no-undef*/
