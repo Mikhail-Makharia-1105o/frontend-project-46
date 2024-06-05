@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { program } from 'commander';
-import gendiff from './utils/genDiff.js';
+import genDiff from './utils/genDiff.js';
 
 program
   .name('gendiff')
@@ -11,7 +11,7 @@ program
   .arguments('<filepath2>')
   .action((filePath1, filePath2, options) => {
     console.log(options);
-    gendiff(filePath1, filePath2, options);
+    genDiff(filePath1, filePath2, options);
   });
 /*eslint-disable-next-line no-undef*/
 program.parse(process.argv)
