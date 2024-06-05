@@ -12,4 +12,5 @@ program
   .action((filePath1, filePath2, options) => {
     gendiff(filePath1, filePath2, options);
   });
-program.parse(process.argv);
+/*eslint-disable-next-line no-undef*/
+program.parse(process.argv)

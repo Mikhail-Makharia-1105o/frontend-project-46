@@ -2,7 +2,7 @@
 import { readFileSync } from 'fs';
 import { load } from 'js-yaml';
 
-export default function parseFileData(filePath, getExtension = false) {
+export default function parseFileData(filePath) {
   const file = readFileSync(filePath, 'utf8');
   const extension = filePath
     .split('\\')[filePath.split('\\').length - 1]
