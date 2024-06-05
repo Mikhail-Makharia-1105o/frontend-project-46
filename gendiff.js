@@ -12,5 +12,5 @@ program
   .action((filePath1, filePath2, options) => {
     gendiff(filePath1, filePath2, options);
   });
-program.parse(process.argv);
+program.parse();
 program.opts();
