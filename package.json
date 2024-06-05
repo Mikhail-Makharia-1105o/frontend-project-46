@@ -5,7 +5,7 @@
   "main": "gendiff.js",
   "type": "module",
   "scripts": {
-    "test": "npx jest --colors"
+    "test": "jest"
   },
   "bin": {
     "gendiff": "gendiff.js"
