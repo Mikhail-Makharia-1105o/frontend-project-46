@@ -13,7 +13,6 @@
   "author": "Makharia-Mikhail-1105o",
   "license": "ISC",
   "devDependencies": {
-    "@eslint/js": "^9.4.0",
     "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.12",
     "@types/js-yaml": "^4.0.9",
