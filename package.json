@@ -4,9 +4,6 @@
   "version": "1.0.0",
   "main": "gendiff.js",
   "type": "module",
-  "scripts": {
-    "test": "jest"
-  },
   "bin": {
     "gendiff": "gendiff.js"
   },
