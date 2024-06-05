@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 import { program } from 'commander';
-import parsePath from './bin/parsePath.js';
-import parseFileData from './bin/parseFileData.js';
-import compare from './utils/compare.js';
+import gendiff from './utils/gendiff.js';
 
 program
   .name('gendiff')
@@ -11,8 +9,8 @@ program
   .option('-f, --format [type]', 'output format')
   .arguments('<filepath1>')
   .arguments('<filepath2>')
-  .action((filePath1, filePath2) => {
-    
+  .action((filePath1, filePath2, options) => {
+    gendiff(filePath1, filePath2, options);
   });
 program.parse(process.argv);
 program.opts();

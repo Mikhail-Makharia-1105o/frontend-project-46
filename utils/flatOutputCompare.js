@@ -1,5 +1,13 @@
 #!usr/bin/env node
 let output = '';
+
+/**
+* Converts comparison object into a set of flat output strings.
+* @param {Object} comparisonObj - comparison object
+* @param {Object} originalObj1 - original object 1
+* @param {Object} originalObj2 - original object 2
+* @param {string} currentPath - current path(for recursion)
+*/
 export default function flatOutput(
   comparisonObj,
   originalObj1,

@@ -5,7 +5,14 @@
 // False nests avoid recursion that we don't need, and help the output functions diplay results properly.
 
 // For example: { a: { b: 4 } } in obj1 is exclusive to obj1. It does not need to be set as nested because
-// it will have a - in front of it either way.
+// it will have " - " in front of it either way.
+
+/**
+* Compares two objects. Returs a comparison object.
+* Comparison object adds type and nested properties, saving key's value in the value property.
+* @param {Object} obj1 - first object
+* @param {Object} obj2 - second object
+*/
 export default function compare(obj1, obj2) {
   const output = {};
   const keys1 = Object.keys(obj1);

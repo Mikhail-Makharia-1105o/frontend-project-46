@@ -1,4 +1,12 @@
 #!usr/bin/env node
+
+/**
+* Converts comparison object into a JSON.parse string object. Adds + and - to added and removed properties.
+* @param {Object} comparisonObj - comparison object
+* @param {Object} originalObj1 - original object 1
+* @param {Object} originalObj2 - original object 2
+* @param {number} depth - current depth(for recursion)
+*/
 function stringify(val, depth) {
   let output = '{\n';
   if (typeof val !== 'object' || !val) {
