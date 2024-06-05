@@ -1,11 +1,12 @@
-import compare from './compare.js';
-import fancyOutput from './fancyOutputCompare.js';
-import flatOutput from './flatOutputCompare.js';
-import JSONOutput from './JSONOutputCompare.js';
-import parsePath from './parsePath.js';
-import parseFileData from './parseFileData.js';
+#!/usr/bin/env node
+import compare from '../utils/compare.js';
+import fancyOutput from '../utils/fancyOutputCompare.js';
+import flatOutput from '../utils/flatOutputCompare.js';
+import JSONOutput from '../utils/JSONOutputCompare.js';
+import parsePath from '../utils/parsePath.js';
+import parseFileData from '../utils/parseFileData.js';
 
-export default function genDiff(filePath1, filePath2, options = {format: 'stylish'}) {
+export default function gendiff(filePath1, filePath2, options = {format: 'stylish'}) {
   typeof options === 'string' ? options = {format: options} : options = options;
   const path1 = parsePath(filePath1);
   const path2 = parsePath(filePath2);
