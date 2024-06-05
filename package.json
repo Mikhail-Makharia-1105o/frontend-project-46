@@ -7,6 +7,9 @@
   "bin": {
     "gendiff": "gendiff.js"
   },
+  "scripts": {
+    "test": "jest"
+  },
   "author": "Makharia-Mikhail-1105o",
   "license": "ISC",
   "devDependencies": {
