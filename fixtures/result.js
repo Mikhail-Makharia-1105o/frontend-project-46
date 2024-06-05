@@ -1,21 +1,20 @@
-const result = `{
-    common: {
-      + follow: false
+const result = `    common: {
         setting1: Value 1
       - setting2: 200
       - setting3: true
       + setting3: null
+        setting6: {
+            key: value
+            doge: {
+              - wow:
+              + wow: so much
+            }
+          + ops: vops
+        }
+      + follow: false
       + setting4: blah blah
       + setting5: {
             key5: value5
-        }
-        setting6: {
-            doge: {
-              - wow: 
-              + wow: so much
-            }
-            key: value
-          + ops: vops
         }
     }
     group1: {
