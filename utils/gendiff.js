@@ -5,7 +5,7 @@ import JSONOutput from './JSONOutputCompare.js';
 import parsePath from './parsePath.js';
 import parseFileData from './parseFileData.js';
 
-export default function gendiff(filePath1, filePath2, options) {
+export default function genDiff(filePath1, filePath2, options) {
   const path1 = parsePath(filePath1);
   const path2 = parsePath(filePath2);
   const fileData1 = parseFileData(path1);
