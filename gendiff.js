@@ -12,4 +12,4 @@ program
   .action((filePath1, filePath2, options) => {
     gendiff(filePath1, filePath2, options);
   });
-program.parse();
+program.parse(process.argv);
