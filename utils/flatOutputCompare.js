@@ -14,7 +14,7 @@ export default function flatOutput(
   originalObj2,
   currentPath = '',
 ) {
-  const keys = Object.keys(comparisonObj);
+  const keys = Object.keys(comparisonObj).sort((a, b) => a > b ? 1 : -1);
   keys.forEach((key) => {
     if (comparisonObj[key].nested) {
       if (comparisonObj[key].type === 'added') {

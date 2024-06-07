@@ -16,14 +16,14 @@ function stringify(val, depth, signshift) {
   }
   const keys = Object.keys(val);
   keys.forEach((key) => {
-    output += '     '.repeat(depth + 1);
+    output += '  '.repeat(depth + 2);
     if (typeof val[key] === 'object') {
-      output += `${key}:  ${stringify(val[key], depth + 1)}\n`;
+      output += `  ${key}: ${stringify(val[key], depth + 2)}\n`;
     } else {
-      output += `${key}:  ${val[key]}\n`;
+      output += `  ${key}: ${val[key]}\n`;
     }
   });
-  output += `${'     '.repeat(depth)}${signshift ? '  }' : '}'}`;
+  output += `${'  '.repeat(depth)}${signshift ? '  }' : '  }'}`;
   return output;
 }
 
@@ -39,9 +39,9 @@ function out(
   comparisonObj,
   originalObj1,
   originalObj2,
-  depth = 0,
+  depth = 1,
 ) {
-  const currentDepth = '     '.repeat(depth);
+  const currentDepth = '  '.repeat(depth);
   let output = '';
   const keys = Object.keys(comparisonObj).sort((a, b) => a > b ? 1 : -1);
   keys.forEach((key) => {
@@ -51,7 +51,7 @@ function out(
           comparisonObj[key].value,
           originalObj1,
           originalObj2[key],
-          depth + 1,
+          depth + 2,
         )}\n`;
       } else {
         output += `${currentDepth}+ ${key}: ${stringify(comparisonObj[key].value, depth, true)}\n`;
@@ -63,7 +63,7 @@ function out(
           comparisonObj[key].value,
           originalObj1,
           originalObj2[key],
-          depth + 1,
+          depth + 2,
         )}\n`;
       } else {
         output += `${currentDepth}- ${key}: ${stringify(comparisonObj[key].value, depth, true)}\n`;
@@ -71,11 +71,11 @@ function out(
     }
     if (comparisonObj[key].type === 'shared') {
       if (comparisonObj[key].nested) {
-        output += ` ${currentDepth}  ${key}: {\n${out(
+        output += `${currentDepth}  ${key}: {\n${out(
           comparisonObj[key].value,
           originalObj1[key],
           originalObj2[key],
-          depth + 1,
+          depth + 2,
         )}\n`;
       } else {
         output += `${currentDepth}  ${key}: ${stringify(comparisonObj[key].value, depth, false)}\n`;
@@ -87,7 +87,7 @@ function out(
           comparisonObj[key].value,
           originalObj1[key],
           originalObj2[key],
-          depth + 1,
+          depth + 2,
         )}\n`;
       } else {
         output += `${currentDepth}- ${key}: ${stringify(originalObj1[key], depth, true)}\n`;
@@ -95,7 +95,7 @@ function out(
       }
     }
   })
-  output += `${currentDepth}}`;
+  output += `${'  '.repeat(depth - 1)}}`;
   return output;
 }
 
@@ -109,5 +109,5 @@ export default function fancyOutput(
     originalObj1,
     originalObj2,
   );
-  return fixOutput(output);
+  return fixOutput(output).slice(0, -1) + '}';
 }
