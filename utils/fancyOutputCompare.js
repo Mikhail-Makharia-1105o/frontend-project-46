@@ -37,7 +37,7 @@ function out(
 ) {
   const currentDepth = '    '.repeat(depth);
   let output = '';
-  const keys = Object.keys(comparisonObj);
+  const keys = Object.keys(comparisonObj).sort((a, b) => a > b ? 1 : -1);
   keys.forEach((key) => {
     if (comparisonObj[key].type === 'added') {
       if (comparisonObj[key].nested) {
@@ -51,8 +51,6 @@ function out(
         output += `  ${currentDepth}+ ${key}: ${stringify(comparisonObj[key].value, depth)}\n`;
       }
     }
-  });
-  keys.forEach((key) => {
     if (comparisonObj[key].type === 'removed') {
       if (comparisonObj[key].nested) {
         output += `  ${currentDepth}- ${key}: {\n${out(
@@ -65,8 +63,6 @@ function out(
         output += `  ${currentDepth}- ${key}: ${stringify(comparisonObj[key].value, depth)}\n`;
       }
     }
-  });
-  keys.forEach((key) => {
     if (comparisonObj[key].type === 'shared') {
       if (comparisonObj[key].nested) {
         output += `  ${currentDepth}  ${key}: {\n${out(
@@ -79,8 +75,6 @@ function out(
         output += `  ${currentDepth}  ${key}: ${stringify(comparisonObj[key].value, depth)}\n`;
       }
     }
-  });
-  keys.forEach((key) => {
     if (comparisonObj[key].type === 'changed') {
       if (comparisonObj[key].nested) {
         output += `  ${currentDepth}  ${key}: {\n${out(

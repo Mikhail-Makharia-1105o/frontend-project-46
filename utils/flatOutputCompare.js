@@ -31,13 +31,6 @@ export default function flatOutput(
           originalObj2,
           `${currentPath}${currentPath ? '.' : ''}${key}`,
         );
-      } else if (comparisonObj[key].type === 'changed') {
-        flatOutput(
-          comparisonObj[key].value,
-          originalObj1[key],
-          originalObj2[key],
-          `${currentPath}${currentPath ? '.' : ''}${key}`,
-        );
       } else {
         flatOutput(
           comparisonObj[key].value,
