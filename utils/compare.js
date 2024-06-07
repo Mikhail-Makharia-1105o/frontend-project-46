@@ -1,4 +1,5 @@
 #!usr/bin/env node
+import _ from 'lodash';
 // SIDENOTE:
 // Nested only applies to object that are considered shared.
 // If there is a deep object that we DO NOT need to go into(i.e. shared objects), we set nested to false.
@@ -22,7 +23,11 @@ export default function compare(obj1, obj2) {
       if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
         const outputNested = compare(obj1[key], obj2[key]);
         if (Object.keys(outputNested).length > 0) {
-          output[key] = { value: outputNested, type: 'changed', nested: true };
+          if (_.isEqual(obj1[key], obj2[key])) {
+            output[key] = { value: outputNested, type: 'shared', nested: true };
+          } else {
+            output[key] = { value: outputNested, type: 'changed', nested: true };
+          }
         }
       } else if (obj1[key] === obj2[key]) {
         output[key] = { value: obj1[key], type: 'shared', nested: false };

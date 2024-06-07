@@ -7,6 +7,10 @@
 * @param {Object} originalObj2 - original object 2
 * @param {number} depth - current depth(for recursion)
 */
+
+function fixOutput(output) {
+  return '{\n' + output;
+}
 function stringify(val, depth) {
   let output = '{\n';
   if (typeof val !== 'object' || !val) {
@@ -25,7 +29,7 @@ function stringify(val, depth) {
   return output;
 }
 
-export default function fancyOutput(
+function out(
   comparisonObj,
   originalObj1,
   originalObj2,
@@ -35,62 +39,75 @@ export default function fancyOutput(
   let output = '';
   const keys = Object.keys(comparisonObj);
   keys.forEach((key) => {
-    if (comparisonObj[key].nested) {
-      if (comparisonObj[key].type === 'added') {
-        output += `  ${currentDepth}+ ${key}: {\n${fancyOutput(
+    if (comparisonObj[key].type === 'added') {
+      if (comparisonObj[key].nested) {
+        output += `  ${currentDepth}+ ${key}: {\n${out(
           comparisonObj[key].value,
           originalObj1,
           originalObj2[key],
           depth + 1,
         )}\n`;
-      } else if (comparisonObj[key].type === 'removed') {
-        output += `  ${currentDepth}- ${key}: {\n${fancyOutput(
-          comparisonObj[key].value,
-          originalObj1[key],
-          originalObj2,
-          depth + 1,
-        )}\n`;
-      } else if (comparisonObj[key].type === 'changed') {
-        output += `   ${currentDepth} ${key}: {\n${fancyOutput(
-          comparisonObj[key].value,
-          originalObj1[key],
-          originalObj2[key],
-          depth + 1,
-        )}\n`;
-      } else if (comparisonObj[key].type === 'shared') {
-        output += `   ${currentDepth} ${key}: {\n${fancyOutput(
-          comparisonObj[key].value,
-          originalObj1[key],
-          originalObj2[key],
-          depth + 1,
-        )}\n`;
+      } else {
+        output += `  ${currentDepth}+ ${key}: ${stringify(comparisonObj[key].value, depth)}\n`;
       }
-    } else if (comparisonObj[key].type === 'added') {
-      output += `  ${currentDepth}+ ${key}: ${stringify(
-        comparisonObj[key].value,
-        depth + 1,
-      )}\n`;
-    } else if (comparisonObj[key].type === 'removed') {
-      output += `  ${currentDepth}- ${key}: ${stringify(
-        comparisonObj[key].value,
-        depth + 1,
-      )}\n`;
-    } else if (comparisonObj[key].type === 'shared') {
-      output += `  ${currentDepth}  ${key}: ${stringify(
-        comparisonObj[key].value,
-        depth + 1,
-      )}\n`;
-    } else if (comparisonObj[key].type === 'changed') {
-      output += `  ${currentDepth}- ${key}: ${stringify(
-        originalObj1[key],
-        depth + 1,
-      )}\n`;
-      output += `  ${currentDepth}+ ${key}: ${stringify(
-        originalObj2[key],
-        depth + 1,
-      )}\n`;
     }
   });
+  keys.forEach((key) => {
+    if (comparisonObj[key].type === 'removed') {
+      if (comparisonObj[key].nested) {
+        output += `  ${currentDepth}- ${key}: {\n${out(
+          comparisonObj[key].value,
+          originalObj1,
+          originalObj2[key],
+          depth + 1,
+        )}\n`;
+      } else {
+        output += `  ${currentDepth}- ${key}: ${stringify(comparisonObj[key].value, depth)}\n`;
+      }
+    }
+  });
+  keys.forEach((key) => {
+    if (comparisonObj[key].type === 'shared') {
+      if (comparisonObj[key].nested) {
+        output += `  ${currentDepth}  ${key}: {\n${out(
+          comparisonObj[key].value,
+          originalObj1[key],
+          originalObj2[key],
+          depth + 1,
+        )}\n`;
+      } else {
+        output += `  ${currentDepth}  ${key}: ${stringify(comparisonObj[key].value, depth)}\n`;
+      }
+    }
+  });
+  keys.forEach((key) => {
+    if (comparisonObj[key].type === 'changed') {
+      if (comparisonObj[key].nested) {
+        output += `  ${currentDepth}  ${key}: {\n${out(
+          comparisonObj[key].value,
+          originalObj1[key],
+          originalObj2[key],
+          depth + 1,
+        )}\n`;
+      } else {
+        output += `  ${currentDepth}- ${key}: ${stringify(originalObj1[key], depth)}\n`;
+        output += `  ${currentDepth}+ ${key}: ${stringify(originalObj2[key], depth)}\n`;
+      }
+    }
+  })
   output += `${currentDepth}}`;
   return output;
+}
+
+export default function fancyOutput(
+  comparisonObj,
+  originalObj1,
+  originalObj2,
+) {
+  const output = out(
+    comparisonObj,
+    originalObj1,
+    originalObj2,
+  );
+  return fixOutput(output);
 }
