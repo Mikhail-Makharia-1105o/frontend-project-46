@@ -19,34 +19,14 @@ export default function flatOutput(
   const keys = Object.keys(comparisonObj).sort((a, b) => (a > b ? 1 : -1));
   keys.forEach((key) => {
     if (comparisonObj[key].nested) {
-      if (comparisonObj[key].type === 'added') {
         output.push(
           flatOutput(
             comparisonObj[key].value,
-            originalObj1,
-            originalObj2[key],
+            comparisonObj[key].type === 'added' ? originalObj1 : originalObj1[key],
+            comparisonObj[key].type === 'removed' ? originalObj2 : originalObj2[key],
             `${currentPath}${currentPath ? '.' : ''}${key}`,
           ),
         );
-      } else if (comparisonObj[key].type === 'removed') {
-        output.push(
-          flatOutput(
-            comparisonObj[key].value,
-            originalObj1[key],
-            originalObj2,
-            `${currentPath}${currentPath ? '.' : ''}${key}`,
-          ),
-        );
-      } else if (comparisonObj[key].type === 'changed') {
-        output.push(
-          flatOutput(
-            comparisonObj[key].value,
-            originalObj1[key],
-            originalObj2[key],
-            `${currentPath}${currentPath ? '.' : ''}${key}`,
-          ),
-        );
-      }
     } else if (comparisonObj[key].type === 'added') {
       const stringformatted = typeof comparisonObj[key].value === 'string' ? `'${comparisonObj[key].value}'` : comparisonObj[key].value;
       const formatted = typeof comparisonObj[key].value === 'object' && comparisonObj[key].value ? '[complex value]' : stringformatted;
