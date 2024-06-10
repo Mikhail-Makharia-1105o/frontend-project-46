@@ -6,13 +6,13 @@ import JSONOutput from './utils/JSONOutputCompare.js';
 import parsePath from './utils/parsePath.js';
 import parseFileData from './utils/parseFileData.js';
 
-export default function gendiff(filePath1, filePath2, options = 'stylish') {
+export default function gendiff(filePath1, filePath2, options = {format: 'stylish'}) {
   const path1 = parsePath(filePath1);
   const path2 = parsePath(filePath2);
   const fileData1 = parseFileData(path1);
   const fileData2 = parseFileData(path2);
   const comparisonObj = compare(fileData1, fileData2);
-  switch (options) {
+  switch (options.format) {
     case 'plain':
       console.log(flatOutput(comparisonObj, fileData1, fileData2));
       return flatOutput(comparisonObj, fileData1, fileData2);

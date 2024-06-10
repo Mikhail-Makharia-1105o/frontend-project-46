@@ -20,8 +20,8 @@ describe('gendiff', () => {
     const filepath2 = resolvePath(`file2.${format}`);
 
     expect(gendiff(filepath1, filepath2)).toEqual(resultStylish);
-    expect(gendiff(filepath1, filepath2, 'stylish')).toEqual(resultStylish);
-    expect(gendiff(filepath1, filepath2, 'plain')).toEqual(resultPlain);
-    expect(gendiff(filepath1, filepath2, 'json')).toEqual(resultJSON);
+    expect(gendiff(filepath1, filepath2, { format: 'stylish'})).toEqual(resultStylish);
+    expect(gendiff(filepath1, filepath2, { format: 'plain'})).toEqual(resultPlain);
+    expect(gendiff(filepath1, filepath2, { format: 'json'})).toEqual(resultJSON);
   });
 });
