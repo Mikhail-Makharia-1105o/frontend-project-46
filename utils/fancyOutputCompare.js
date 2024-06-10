@@ -2,7 +2,9 @@
 function fixOutput(output) {
   return '{\n' + output;
 }
-/* eslint-disable fp/no-mutation fp/no-mutating-methods fp/no-let */
+/* eslint-disable fp/no-mutation */
+/* eslint-disable fp/no-mutating-methods */
+/* eslint-disable fp/no-mutation fp/no-let */
 /**
  * JSON.stringify, modified to shift the } properly.
  * @param {any} val - value to stringify
@@ -18,7 +20,7 @@ function stringify(val, depth, signshift) {
   }
   const keys = Object.keys(val);
   keys.forEach((key) => {
-    output += '  '.repeat(depth + 2);
+    output = `${output}${'  '.repeat(depth + 2)}`;
     if (typeof val[key] === 'object') {
       output = `${output}  ${key}: ${stringify(val[key], depth + 2)}\n`;
     } else {

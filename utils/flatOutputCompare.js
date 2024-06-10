@@ -1,5 +1,7 @@
 #!usr/bin/env node
-/* eslint-disable fp/no-mutation fp/no-mutating-methods fp/no-let */
+/* eslint-disable fp/no-mutation */
+/* eslint-disable fp/no-mutating-methods */
+/* eslint-disable fp/no-mutation fp/no-let */
 /**
  * Converts comparison object into a set of flat output strings.
  * @param {Object} comparisonObj - comparison object
@@ -11,7 +13,7 @@ export default function flatOutput(
   comparisonObj,
   originalObj1,
   originalObj2,
-  currentPath = ''
+  currentPath = '',
 ) {
   const output = [];
   const keys = Object.keys(comparisonObj).sort((a, b) => (a > b ? 1 : -1));
@@ -23,7 +25,7 @@ export default function flatOutput(
             comparisonObj[key].value,
             originalObj1,
             originalObj2[key],
-            `${currentPath}${currentPath ? '.' : ''}${key}`
+            `${currentPath}${currentPath ? '.' : ''}${key}`,
           )
         );
       } else if (comparisonObj[key].type === 'removed') {
@@ -32,7 +34,7 @@ export default function flatOutput(
             comparisonObj[key].value,
             originalObj1[key],
             originalObj2,
-            `${currentPath}${currentPath ? '.' : ''}${key}`
+            `${currentPath}${currentPath ? '.' : ''}${key}`,
           )
         );
       } else if (comparisonObj[key].type === 'changed') {
@@ -41,7 +43,7 @@ export default function flatOutput(
             comparisonObj[key].value,
             originalObj1[key],
             originalObj2[key],
-            `${currentPath}${currentPath ? '.' : ''}${key}`
+            `${currentPath}${currentPath ? '.' : ''}${key}`,
           )
         );
       }
@@ -54,8 +56,12 @@ export default function flatOutput(
         `Property '${currentPath}${currentPath ? '.' : ''}${key}' was removed`,
       );
     } else if (comparisonObj[key].type === 'changed') {
+      const stringformatted1 = typeof originalObj1[key] === 'string' ? `'${originalObj1[key]}'` : originalObj1[key];
+      const stringformatted2 = typeof originalObj2[key] === 'string' ? `'${originalObj2[key]}'` : originalObj2[key];
+      const formatted1 = typeof originalObj1[key] === 'object' && originalObj1[key] ? '[complex value]' : stringformatted1;
+      const formatted2 = typeof originalObj2[key] === 'object' && originalObj2[key] ? '[complex value]' : stringformatted2;
       output.push(
-        `Property '${currentPath}${currentPath ? '.' : ''}${key}' was updated. From ${typeof originalObj1[key] === 'object' && originalObj1[key] ? '[complex value]' : typeof originalObj1[key] === 'string' ? `'${originalObj1[key]}'` : originalObj1[key]} to ${typeof originalObj2[key] === 'object' && originalObj2[key] ? '[complex value]' : typeof originalObj2[key] === 'string' ? `'${originalObj2[key]}'` : originalObj2[key]}`,
+        `Property '${currentPath}${currentPath ? '.' : ''}${key}' was updated. From ${formatted1} to ${formatted2}`,
       );
     }
   });

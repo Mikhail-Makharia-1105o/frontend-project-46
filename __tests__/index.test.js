@@ -7,9 +7,7 @@ import resultJSON from '../fixtures/resultJSON.js';
 
 const testList = ['yml', 'json'];
 
-const resolvePath = (filePath) =>
-  path.resolve(process.cwd(), `fixtures/test_files/${filePath}`);
-
+const resolvePath = (filePath) => path.resolve(process.cwd(), `fixtures/test_files/${filePath}`);
 describe('gendiff', () => {
   test.each(testList)('gendiff %s', (format) => {
     const filepath1 = resolvePath(`file1.${format}`);
@@ -17,13 +15,13 @@ describe('gendiff', () => {
 
     expect(gendiff(filepath1, filepath2)).toEqual(resultStylish);
     expect(gendiff(filepath1, filepath2, { format: 'stylish' })).toEqual(
-      resultStylish
+      resultStylish,
     );
     expect(gendiff(filepath1, filepath2, { format: 'plain' })).toEqual(
-      resultPlain
+      resultPlain,
     );
     expect(gendiff(filepath1, filepath2, { format: 'json' })).toEqual(
-      resultJSON
+      resultJSON,
     );
   });
 });
