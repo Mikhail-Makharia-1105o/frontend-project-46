@@ -1,16 +1,21 @@
 #!usr/bin/env node
 import _ from 'lodash';
+/* eslint-disable fp/no-mutation */
 // SIDENOTE:
 // Nested only applies to object that are considered shared.
-// If there is a deep object that we DO NOT need to go into(i.e. shared objects), we set nested to false.
-// False nests avoid recursion that we don't need, and help the output functions diplay results properly.
+// If there is a deep object that we DO NOT need to go into(i.e. shared objects), 
+// we set nested to false.
+// False nests avoid recursion that we don't need, and help the output 
+// functions diplay results properly.
 
-// For example: { a: { b: 4 } } in obj1 is exclusive to obj1. It does not need to be set as nested because
+// For example: { a: { b: 4 } } in obj1 is exclusive to obj1. It does not need 
+// to be set as nested.
 // it will have " - " in front of it either way.
 
 /**
 * Compares two objects. Returs a comparison object.
-* Comparison object adds type and nested properties, saving key's value in the value property.
+* Comparison object adds type and nested properties, 
+* saving key's value in the value property.
 * @param {Object} obj1 - first object
 * @param {Object} obj2 - second object
 */
