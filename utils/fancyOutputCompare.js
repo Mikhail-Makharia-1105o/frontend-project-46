@@ -34,7 +34,6 @@ function stringify(val, depth, signshift) {
 * @param {Object} originalObj2 - original object 2
 * @param {number} depth - current depth(for recursion)
 */
-
 function out(
   comparisonObj,
   originalObj1,

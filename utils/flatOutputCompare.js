@@ -46,6 +46,5 @@ export default function flatOutput(
       output.push(`Property '${currentPath}${currentPath ? '.' : ''}${key}' was updated. From ${typeof originalObj1[key] === 'object' && originalObj1[key] ? '[complex value]' : typeof originalObj1[key] === 'string' ? `'${originalObj1[key]}'` : originalObj1[key]} to ${typeof originalObj2[key] === 'object' && originalObj2[key] ? '[complex value]' : typeof originalObj2[key] === 'string' ? `'${originalObj2[key]}'` : originalObj2[key]}`);
     }
   });
-  console.log(output);
   return output.flat(Infinity).join('\n');
 }
