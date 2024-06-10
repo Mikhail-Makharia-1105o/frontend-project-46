@@ -33,11 +33,11 @@ export default function flatOutput(
       );
     } else if (comparisonObj[key].type === 'added') {
       const stringformatted = typeof comparisonObj[key].value === 'string'
-          ? `'${comparisonObj[key].value}'`
-          : comparisonObj[key].value;
+        ? `'${comparisonObj[key].value}'`
+        : comparisonObj[key].value;
       const formatted = typeof comparisonObj[key].value === 'object' && comparisonObj[key].value
-          ? '[complex value]'
-          : stringformatted;
+        ? '[complex value]'
+        : stringformatted;
       output.push(
         `Property '${currentPath}${currentPath ? '.' : ''}${key}' was added with value: ${formatted}`,
       );
@@ -47,17 +47,17 @@ export default function flatOutput(
       );
     } else if (comparisonObj[key].type === 'changed') {
       const stringformatted1 = typeof originalObj1[key] === 'string'
-          ? `'${originalObj1[key]}'`
-          : originalObj1[key];
+        ? `'${originalObj1[key]}'`
+        : originalObj1[key];
       const stringformatted2 = typeof originalObj2[key] === 'string'
-          ? `'${originalObj2[key]}'`
-          : originalObj2[key];
+        ? `'${originalObj2[key]}'`
+        : originalObj2[key];
       const formatted1 = typeof originalObj1[key] === 'object' && originalObj1[key]
-          ? '[complex value]'
-          : stringformatted1;
+        ? '[complex value]'
+        : stringformatted1;
       const formatted2 = typeof originalObj2[key] === 'object' && originalObj2[key]
-          ? '[complex value]'
-          : stringformatted2;
+        ? '[complex value]'
+        : stringformatted2;
       output.push(
         `Property '${currentPath}${currentPath ? '.' : ''}${key}' was updated. From ${formatted1} to ${formatted2}`,
       );
