@@ -1,6 +1,6 @@
 #!usr/bin/env node
 function fixOutput(output) {
-  return '{\n' + output;
+  return `{\n${output}`;
 }
 /* eslint-disable fp/no-mutation */
 /* eslint-disable fp/no-mutating-methods */
