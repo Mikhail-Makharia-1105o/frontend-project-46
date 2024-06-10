@@ -26,23 +26,13 @@ export default function compare(obj1, obj2) {
   const keys2 = Object.keys(obj2);
   keys1.forEach((key) => {
     if (keys2.includes(key)) {
-      if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+      if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
         const outputNested = compare(obj1[key], obj2[key]);
         if (Object.keys(outputNested).length > 0) {
-          if (_.isEqual(obj1[key], obj2[key])) {
-            output[key] = { value: outputNested, type: 'shared', nested: true };
-          } else {
-            output[key] = { value: outputNested, type: 'changed', nested: true };
-          }
+            output[key] = { value: outputNested, type: _.isEqual(obj1[key], obj2[key]) ? 'shared' : 'changed', nested: true };
         }
-      } else if (obj1[key] === obj2[key]) {
-        output[key] = { value: obj1[key], type: 'shared', nested: false };
       } else {
-        output[key] = {
-          value: obj1[key],
-          type: 'changed',
-          nested: false,
-        };
+        output[key] = { value: obj1[key], type: _.isEqual(obj1[key], obj2[key]) ? 'shared' : 'changed', nested: false };
       }
     } else {
       output[key] = { value: obj1[key], type: 'removed', nested: false };
