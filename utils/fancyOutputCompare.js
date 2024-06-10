@@ -2,8 +2,7 @@
 function fixOutput(output) {
   return '{\n' + output;
 }
-/* eslint-disable fp/no-mutation */
-/* eslint-disable fp/no-mutating-methods*/
+/* eslint-disable fp/no-mutation fp/no-mutating-methods fp/no-let */
 /**
  * JSON.stringify, modified to shift the } properly.
  * @param {any} val - value to stringify
@@ -21,9 +20,9 @@ function stringify(val, depth, signshift) {
   keys.forEach((key) => {
     output += '  '.repeat(depth + 2);
     if (typeof val[key] === 'object') {
-      output += `  ${key}: ${stringify(val[key], depth + 2)}\n`;
+      output = `${output}  ${key}: ${stringify(val[key], depth + 2)}\n`;
     } else {
-      output += `  ${key}: ${val[key]}\n`;
+      output = `${output}  ${key}: ${val[key]}\n`;
     }
   });
   output += `${'  '.repeat(depth)}${signshift ? '  }' : '  }'}`;
@@ -45,55 +44,55 @@ function out(comparisonObj, originalObj1, originalObj2, depth = 1) {
   keys.forEach((key) => {
     if (comparisonObj[key].type === 'added') {
       if (comparisonObj[key].nested) {
-        output += `${currentDepth}+ ${key}: {\n${out(
+        output = `${output}${currentDepth}+ ${key}: {\n${out(
           comparisonObj[key].value,
           originalObj1,
           originalObj2[key],
-          depth + 2
+          depth + 2,
         )}\n`;
       } else {
-        output += `${currentDepth}+ ${key}: ${stringify(comparisonObj[key].value, depth, true)}\n`;
+        output = `${output}${currentDepth}+ ${key}: ${stringify(comparisonObj[key].value, depth, true)}\n`;
       }
     }
     if (comparisonObj[key].type === 'removed') {
       if (comparisonObj[key].nested) {
-        output += `${currentDepth}- ${key}: {\n${out(
+        output = `${output}${currentDepth}- ${key}: {\n${out(
           comparisonObj[key].value,
           originalObj1,
           originalObj2[key],
-          depth + 2
+          depth + 2,
         )}\n`;
       } else {
-        output += `${currentDepth}- ${key}: ${stringify(comparisonObj[key].value, depth, true)}\n`;
+        output = `${output}${currentDepth}- ${key}: ${stringify(comparisonObj[key].value, depth, true)}\n`;
       }
     }
     if (comparisonObj[key].type === 'shared') {
       if (comparisonObj[key].nested) {
-        output += `${currentDepth}  ${key}: {\n${out(
+        output = `${output}${currentDepth}  ${key}: {\n${out(
           comparisonObj[key].value,
           originalObj1[key],
           originalObj2[key],
-          depth + 2
+          depth + 2,
         )}\n`;
       } else {
-        output += `${currentDepth}  ${key}: ${stringify(comparisonObj[key].value, depth, false)}\n`;
+        output = `${output}${currentDepth}  ${key}: ${stringify(comparisonObj[key].value, depth, false)}\n`;
       }
     }
     if (comparisonObj[key].type === 'changed') {
       if (comparisonObj[key].nested) {
-        output += `${currentDepth}  ${key}: {\n${out(
+        output = `${output}${currentDepth}  ${key}: {\n${out(
           comparisonObj[key].value,
           originalObj1[key],
           originalObj2[key],
-          depth + 2
+          depth + 2,
         )}\n`;
       } else {
-        output += `${currentDepth}- ${key}: ${stringify(originalObj1[key], depth, true)}\n`;
-        output += `${currentDepth}+ ${key}: ${stringify(originalObj2[key], depth, true)}\n`;
+        output = `${output}${currentDepth}- ${key}: ${stringify(originalObj1[key], depth, true)}\n`;
+        output = `${output}${currentDepth}+ ${key}: ${stringify(originalObj2[key], depth, true)}\n`;
       }
     }
   });
-  output += `${'  '.repeat(depth - 1)}}`;
+  output = `${output}${'  '.repeat(depth - 1)}}`;
   return output;
 }
 
