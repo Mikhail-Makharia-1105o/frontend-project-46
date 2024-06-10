@@ -61,17 +61,13 @@ function out(comparisonObj, originalObj1, originalObj2, depth = 1) {
         comparisonObj[key].type === 'removed'
           ? originalObj1
           : originalObj1[key],
-        comparisonObj[key].type === 'added'
-          ? originalObj2
-          : originalObj2[key],
+        comparisonObj[key].type === 'added' ? originalObj2 : originalObj2[key],
         depth + 2,
       )}\n`;
+    } else if (comparisonObj[key].type === 'changed') {
+      output = `${output}${currentDepth}- ${key}: ${stringify(originalObj1[key], depth, sign !== '  ')}\n${currentDepth}+ ${key}: ${stringify(originalObj2[key], depth, sign !== '  ')}\n`;
     } else {
-      if (comparisonObj[key].type === 'changed') {
-        output = `${output}${currentDepth}- ${key}: ${stringify(originalObj1[key], depth, sign === '  ' ? false : true)}\n${currentDepth}+ ${key}: ${stringify(originalObj2[key], depth, sign === '  ' ? false : true)}\n`;
-      } else {
-        output = `${output}${currentDepth}${sign}${key}: ${stringify(comparisonObj[key].value, depth, sign === '  ' ? false : true)}\n`;
-      }
+      output = `${output}${currentDepth}${sign}${key}: ${stringify(comparisonObj[key].value, depth, sign !== '  ')}\n`;
     }
   });
   output = `${output}${'  '.repeat(depth - 1)}}`;

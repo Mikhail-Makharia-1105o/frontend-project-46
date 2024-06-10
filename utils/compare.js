@@ -29,7 +29,7 @@ export default function compare(obj1, obj2) {
       if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
         const outputNested = compare(obj1[key], obj2[key]);
         if (Object.keys(outputNested).length > 0) {
-            output[key] = { value: outputNested, type: _.isEqual(obj1[key], obj2[key]) ? 'shared' : 'changed', nested: true };
+          output[key] = { value: outputNested, type: _.isEqual(obj1[key], obj2[key]) ? 'shared' : 'changed', nested: true };
         }
       } else {
         output[key] = { value: obj1[key], type: _.isEqual(obj1[key], obj2[key]) ? 'shared' : 'changed', nested: false };
