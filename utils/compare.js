@@ -2,7 +2,7 @@
 import _ from 'lodash';
 /* eslint-disable fp/no-mutation */
 /* eslint-disable fp/no-mutating-methods */
-/* eslint-disable fp/no-mutation fp/no-let */
+/* eslint-disable fp/no-let */
 /** SIDENOTE:
 * Nested only applies to object that are considered shared.
 * If there is a deep object that we DO NOT need to go into(i.e. shared objects),

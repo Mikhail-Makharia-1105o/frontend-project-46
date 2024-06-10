@@ -4,7 +4,7 @@ function fixOutput(output) {
 }
 /* eslint-disable fp/no-mutation */
 /* eslint-disable fp/no-mutating-methods */
-/* eslint-disable fp/no-mutation fp/no-let */
+/* eslint-disable fp/no-let */
 /**
  * JSON.stringify, modified to shift the } properly.
  * @param {any} val - value to stringify
@@ -100,5 +100,5 @@ function out(comparisonObj, originalObj1, originalObj2, depth = 1) {
 
 export default function fancyOutput(comparisonObj, originalObj1, originalObj2) {
   const output = out(comparisonObj, originalObj1, originalObj2);
-  return fixOutput(output).slice(0, -1) + '}';
+  return fixOutput(output).slice(0, -1).concat('}');
 }

@@ -1,7 +1,7 @@
 #!usr/bin/env node
 /* eslint-disable fp/no-mutation */
 /* eslint-disable fp/no-mutating-methods */
-/* eslint-disable fp/no-mutation fp/no-let */
+/* eslint-disable fp/no-let */
 /**
  * Converts comparison object into a set of flat output strings.
  * @param {Object} comparisonObj - comparison object
@@ -26,7 +26,7 @@ export default function flatOutput(
             originalObj1,
             originalObj2[key],
             `${currentPath}${currentPath ? '.' : ''}${key}`,
-          )
+          ),
         );
       } else if (comparisonObj[key].type === 'removed') {
         output.push(
@@ -35,7 +35,7 @@ export default function flatOutput(
             originalObj1[key],
             originalObj2,
             `${currentPath}${currentPath ? '.' : ''}${key}`,
-          )
+          ),
         );
       } else if (comparisonObj[key].type === 'changed') {
         output.push(
@@ -44,12 +44,14 @@ export default function flatOutput(
             originalObj1[key],
             originalObj2[key],
             `${currentPath}${currentPath ? '.' : ''}${key}`,
-          )
+          ),
         );
       }
     } else if (comparisonObj[key].type === 'added') {
+      const stringformatted = typeof comparisonObj[key].value === 'string' ? `'${comparisonObj[key].value}'` : comparisonObj[key].value;
+      const formatted = typeof comparisonObj[key].value === 'object' && comparisonObj[key].value ? '[complex value]' : stringformatted;
       output.push(
-        `Property '${currentPath}${currentPath ? '.' : ''}${key}' was added with value: ${typeof comparisonObj[key].value === 'object' && comparisonObj[key].value ? '[complex value]' : typeof comparisonObj[key].value === 'string' ? `'${comparisonObj[key].value}'` : comparisonObj[key].value}`,
+        `Property '${currentPath}${currentPath ? '.' : ''}${key}' was added with value: ${formatted}`,
       );
     } else if (comparisonObj[key].type === 'removed') {
       output.push(
