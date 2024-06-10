@@ -68,8 +68,7 @@ function out(comparisonObj, originalObj1, originalObj2, depth = 1) {
       )}\n`;
     } else {
       if (comparisonObj[key].type === 'changed') {
-        output = `${output}${currentDepth}- ${key}: ${stringify(originalObj1[key], depth, sign === '  ' ? false : true)}\n`;
-        output = `${output}${currentDepth}+ ${key}: ${stringify(originalObj2[key], depth, sign === '  ' ? false : true)}\n`;
+        output = `${output}${currentDepth}- ${key}: ${stringify(originalObj1[key], depth, sign === '  ' ? false : true)}\n${output}${currentDepth}+ ${key}: ${stringify(originalObj2[key], depth, sign === '  ' ? false : true)}\n`;
       } else {
         output = `${output}${currentDepth}${sign}${key}: ${stringify(comparisonObj[key].value, depth, sign === '  ' ? false : true)}\n`;
       }
