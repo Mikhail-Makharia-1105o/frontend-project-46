@@ -1,7 +1,4 @@
 #!usr/bin/env node
-function fixOutput(output) {
-  return `{\n${output}`;
-}
 /* eslint-disable fp/no-mutation */
 /* eslint-disable fp/no-mutating-methods */
 /* eslint-disable fp/no-let */
@@ -76,5 +73,5 @@ function out(comparisonObj, originalObj1, originalObj2, depth = 1) {
 
 export default function fancyOutput(comparisonObj, originalObj1, originalObj2) {
   const output = out(comparisonObj, originalObj1, originalObj2);
-  return fixOutput(output).slice(0, -1).concat('}');
+  return `{\n${(output).slice(0, -1).concat('}')}`;
 }
