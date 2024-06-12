@@ -14,8 +14,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - run: npm run test
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.1.1
         env:
             CC_TEST_REPORTER_ID: ${{ secrets.TEST_COV_ID }}
+      - run: before-build
+      - run: npm run test
+      - run: after-build
