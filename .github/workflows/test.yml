@@ -21,4 +21,4 @@ jobs:
         with: 
           coverageCommand: npm run test
       - run: cc-test-reporter before-build
-      - run: cc-test-reporter format-coverage
+      - run: cc-test-reporter format-coverage -t jacoco
