@@ -20,5 +20,5 @@ jobs:
             CC_TEST_REPORTER_ID: ${{ secrets.TEST_COV_ID }}
         with: 
           coverageCommand: npm run test
-      - run: before-build
-      - run: after-build
+      - run: cc-test-reporter before-build
+      - run: cc-test-reporter format-coverage
