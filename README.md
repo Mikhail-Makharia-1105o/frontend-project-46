@@ -5,6 +5,9 @@
 
 <a href="https://codeclimate.com/github/Mikhail-Makharia-1105o/frontend-project-46/test_coverage"><img src="https://api.codeclimate.com/v1/badges/af84823b83cb3d3df30f/test_coverage" /></a>
 
+<a href="reports/mutation/mutation.html">stryker report</a>
+
+
 <h1>Overview:</h1>
 
 <code>gendiff < filename1 > < filename2 > --format[output type]</code>

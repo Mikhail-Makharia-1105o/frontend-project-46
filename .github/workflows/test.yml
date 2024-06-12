@@ -19,6 +19,6 @@ jobs:
         env:
             CC_TEST_REPORTER_ID: ${{ secrets.TEST_COV_ID }}
         with: 
-          coverageCommand: npm run test
+          coverageCommand: npx stryker run
       - run: cc-test-reporter before-build
-      - run: cc-test-reporter after-build -t jacoco
+      - run: cc-test-reporter after-build
